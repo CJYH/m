@@ -2,6 +2,14 @@
 
 A language parser & tree-walking interpreter
 
+# Usage
+```
+git clone https://github.com/CJYH/m.git
+cd ./m/src
+make main
+./main ./test/eval_test1.em
+```
+
 # Language gramma
 
 ```
