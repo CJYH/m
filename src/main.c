@@ -14,17 +14,18 @@ static int _proc(char *s, int is_file) {
     CHECK_NULL_ERROR(p->prog);
     CHECK_NULL_ERROR(p->prog->stmts);
 
+    /*
     printf("output stmts:\n");
     for (; i < PROGRAM_SIZE(p->prog); i++) {
         st = get_stmt(p->prog, i);
         print_stmt(st, 0);
-    }
+    } */
 
     iobject_init();
     interp_init();
 
-    printf("\n\n\neval stmts:\n");
-    tw_eval(GLOBAL_INTERP(), p->prog);
+    // printf("\n\n\neval stmts:\n");
+    tw_eval(GLOBAL_INTERP(), p->prog, is_file == 0);
 
     return 0;
 }

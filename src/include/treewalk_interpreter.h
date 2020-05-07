@@ -42,8 +42,8 @@ struct iobject *tw_top(struct tw_interp *interp);
 void tw_pop(struct tw_interp *interp);
 int tw_empty(struct tw_interp *interp);
 
-int tw_eval(struct tw_interp *interp, struct program *prog);
-int tw_eval_stmt(struct tw_interp *interp, struct stmt *st);
+int tw_eval(struct tw_interp *interp, struct program *prog, int is_interactive);
+int tw_eval_stmt(struct tw_interp *interp, struct stmt *st, int is_intecative);
 struct iobject *tw_eval_expr(struct tw_interp *interp, struct expr *e);
 
 #define ENTER_ENV(interp, e, t)    \

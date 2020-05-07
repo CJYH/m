@@ -112,7 +112,7 @@ void tw_pop(struct tw_interp *interp) {
     interp->stk->size--;
 }
 
-int tw_eval(struct tw_interp *interp, struct program *prog) {
+int tw_eval(struct tw_interp *interp, struct program *prog, int is_interactive) {
     int i, rc;
     rc = OK;
     if (!prog || !prog->stmts) {
@@ -120,7 +120,7 @@ int tw_eval(struct tw_interp *interp, struct program *prog) {
     }
 
     for (i = 0; i < prog->stmts->size; i++) {
-        if ((rc = tw_eval_stmt(interp, stmt_list_get(prog->stmts, i))) < 0) {
+        if ((rc = tw_eval_stmt(interp, stmt_list_get(prog->stmts, i), is_interactive)) < 0) {
             return rc;
         }
     }
@@ -128,7 +128,7 @@ int tw_eval(struct tw_interp *interp, struct program *prog) {
     return rc;
 }
 
-int tw_eval_stmt(struct tw_interp *interp, struct stmt *st) {
+int tw_eval_stmt(struct tw_interp *interp, struct stmt *st, int is_interactive) {
     int i, rc;
     struct iobject *obj;
     struct iliteral_object *literal;
@@ -173,8 +173,10 @@ int tw_eval_stmt(struct tw_interp *interp, struct stmt *st) {
             est = (struct expr_stmt *) st;
             obj = tw_eval_expr(interp, est->e);
             obj = VALUE(obj);
-            // printf("$$ ");
-            // iobject_print(obj);
+            if (is_interactive) {
+                iobject_print(obj);
+                printf("\n");
+            }
             break;
         default:
             break;
@@ -267,7 +269,7 @@ static int tw_eval_block_stmt(struct tw_interp *interp, struct block_stmt *bst) 
     ENTER_ENV(interp, env, ET_BLOCK)
 
     for (i = 0; i < bst->stmts->size; i++) {
-        rc = tw_eval_stmt(interp, stmt_list_get(bst->stmts, i));
+        rc = tw_eval_stmt(interp, stmt_list_get(bst->stmts, i), 0);
         if (rc < 0) {
             break;
         }
@@ -899,7 +901,7 @@ static struct iobject *tw_eval_call_expr(struct tw_interp *interp, struct call_e
     obj = NULL;
     bst = fobj->fn->stmts;
     for (i = 0; i < bst->stmts->size; ++i) {
-        if (tw_eval_stmt(interp, stmt_list_get(bst->stmts, i)) < 0) {
+        if (tw_eval_stmt(interp, stmt_list_get(bst->stmts, i), 0) < 0) {
             printf("eval func stmt %d failed\n", i);
             return NULL;
         }
