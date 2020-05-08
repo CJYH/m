@@ -34,7 +34,7 @@ bool: 'true' | 'false'
 char: 0-127
 int: 0 | [1-9][0-9]* | 0x[0-9a-fA-F]
 float: [0 | [1-9][0-9]* | 0x[0-9a-fA-F] ] '.' [e|E [+ | -]] [0-9]*
-string: '"'[char]*'"'
+string: '"'char*'"'
 
 unary_expr: [uop] expr
 binary_expr: expr bop expr
