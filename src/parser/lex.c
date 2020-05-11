@@ -171,10 +171,13 @@ struct token *tokenizer(struct lexer *lex) {
         lex->col = 1;
     } else if (ch == '.') {
         t->type = TK_DOT;
-        t->literal[i++] = ch;
+        prev_ch = ch;
         ch = peek(lex);
         if (DIGIT(ch)) {
+            ch = prev_ch;
             goto fraction;
+        } else {
+            t->literal[i++] = ch;
         }
     } else if (DIGIT(ch)) {
         t->type = TK_INT;

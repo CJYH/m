@@ -540,7 +540,7 @@ static struct iobject *tw_eval_number_binary_expr(struct tw_interp *interp, stru
             ir = ((struct iliteral_object *) v)->val.l;
             kind = 1;
         } else if (IS_IOBJECT_TYPE(v, OT_FLOAT)) {
-            fr = ((struct iliteral_object *) v)->val.l;
+            fr = ((struct iliteral_object *) v)->val.f;
             kind = 2;
         }
     } else if (IS_IOBJECT_TYPE(v, OT_FLOAT)) {
@@ -551,7 +551,7 @@ static struct iobject *tw_eval_number_binary_expr(struct tw_interp *interp, stru
             ir = ((struct iliteral_object *) v)->val.l;
             kind = 3;
         } else if (IS_IOBJECT_TYPE(v, OT_FLOAT)) {
-            fr = ((struct iliteral_object *) v)->val.l;
+            fr = ((struct iliteral_object *) v)->val.f;
             kind = 4;
         }
     }
@@ -562,6 +562,7 @@ static struct iobject *tw_eval_number_binary_expr(struct tw_interp *interp, stru
 
     switch (tt) {
         case TK_PLUS:
+            // printf("%ld, %ld, %lf, %lf, kind = %d", il, ir, fl, fr, kind);
             if (kind == 1) {
                 res = (struct iobject *) find_int_literal(interp->consts, il + ir);
             } else if (kind == 2) {
