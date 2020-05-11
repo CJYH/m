@@ -43,7 +43,11 @@ struct expr *parse_literal_expr(struct parser *p) {
             } else {
                 base = 10;
             }
-            e->value.l = strtol(tk->literal, NULL, base);
+            if (strchr(tk->literal, 'e') || strchr(tk->literal, 'E')) {
+                e->value.l = (long) strtod(tk->literal, NULL);
+            } else {
+                e->value.l = strtol(tk->literal, NULL, base);
+            }
             break;
         case TK_FLOAT:
             e->value.f = strtod(tk->literal, NULL);
