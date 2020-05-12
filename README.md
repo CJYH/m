@@ -10,7 +10,7 @@ make main
 ./main ./test/eval_test1.em
 ```
 
-# Language gramma
+# Language grammar
 
 ```
 program: stmt*

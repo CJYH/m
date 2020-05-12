@@ -776,7 +776,7 @@ static void iobject_print_map_item(struct imap_item_object *item) {
     printf("<");
     printf(" key: ");
     iobject_print(item->key);
-    printf(" ,val: ");
+    printf(" , val: ");
     iobject_print(item->val);
     printf(">\n");
 }
@@ -784,7 +784,7 @@ static void iobject_print_map_item(struct imap_item_object *item) {
 static void iobject_print_map(struct imap_object *map) {
     int i;
     struct imap_item_object *item;
-    printf("{\n");
+    printf("\n{");
     for (i = 0; i < map->cap; i++) {
         item = map->items[i];
         while (item) {
@@ -795,17 +795,19 @@ static void iobject_print_map(struct imap_object *map) {
             item = item->next;
         }
     }
-    printf("\n}\n");
+    printf("}\n");
 }
 
 static void iobject_print_array(struct ilist_object *list) {
     int i;
-    printf("[\n");
+    printf("[");
     for (i = 0; i < list->size; i++) {
-        printf("\telem:");
         iobject_print(VALUE(ilist_get(list, i)));
+        if (i < list->size -1) {
+            printf(",");
+        }
     }
-    printf("\n]\n");
+    printf("]\n");
 }
 
 static void iobject_print_func(struct ifunc_object *func) {

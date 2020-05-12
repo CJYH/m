@@ -32,3 +32,4 @@ print(a);
 
 var float = 8.98 + .89 + 0x7a.8;
 print("float =", float);
+print(type(float));
