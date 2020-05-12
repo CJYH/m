@@ -1,11 +1,21 @@
-var a = {"list": [1, 2, 3], "func": func(a, b) {
-    var r = 0;
-    var i = a;
-    for (; i < b; i += 1) {
-        r += i;
-    }
-    return r;
-}, "map": { "key": [3, 4, 5], "func": func(a, b) {return a + b;}}
+var a = {
+	"list": [1, 2, 3],
+
+	"func": func(a, b) {
+            var r = 0;
+            var i = a;
+            for (; i < b; i += 1) {
+                r += i;
+            }
+            return r;
+	},
+
+	"map": {
+		"key": [3, 4, 5],
+		"func": func(a, b) {
+			return a + b;
+		}
+	}
 };
 
 print(type(a));
