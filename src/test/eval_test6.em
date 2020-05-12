@@ -40,6 +40,6 @@ print(f(10, a["func"]));
 
 print(a);
 
-var float = 8.98 + .89 + 0x7a.8;
+var float = 1.2e3 + 8.98 + .89 + 0x7a.8;
 print("float =", float);
 print(type(float));
