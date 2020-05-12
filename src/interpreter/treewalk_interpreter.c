@@ -881,7 +881,7 @@ static struct iobject *tw_eval_call_expr(struct tw_interp *interp, struct call_e
     }
     fobj = (struct ifunc_object *) obj;
 
-    tparams=fobj->fn->params;
+    tparams = fobj->fn->params;
     if ((!tparams && n) || (tparams && tparams->size != n)) {
         printf("# of params unmatched\n");
         return NULL;
